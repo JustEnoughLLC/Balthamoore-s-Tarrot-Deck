@@ -1,22 +1,28 @@
 // Balhamoores Tarrot Deck program
 // Justin McKeever 4/5/2023
 
+// god help me...
+
 #include <string>
 #include <iostream>
 #include <cstdlib>
 
+#include "codeUtil.h"
+
 using namespace std;
 
 void menu();
-int menuLoop();
-void Selection();
+void menuLoop();
+void Selection(int);
 void viewDeck();
 void ShuffleDeck();
 void DrawCard();
+void spellCheck(char);
+void addSpell();
 
 int main()
 {
-	int choice = menuLoop();
+	menuLoop();
 	
 }
 
@@ -26,10 +32,11 @@ void menu()
 	cout << " 1. Let the deck reclaim itself... (reshuffe - requires long rest) \n";
 	cout << " 2. Let the universe decide your fate... (draw a card) \n";
 	cout << " 3. Collapse the possibilities...  (observe the decks makeup) \n";
+	cout << " 4. Give the universe a choice... (add spell to repository) \n";
 	return;
 }
 
-int menuLoop()
+void menuLoop()
 {
 	int choice;
 	int loopControl = 0;
@@ -37,7 +44,7 @@ int menuLoop()
 		{
 			menu();
 			cin >> choice;
-			return choice;
+			Selection(choice);
 		}
 }
 
@@ -49,14 +56,22 @@ void Selection(int a)
 	if (choice == 1)
 	{
 		ShuffleDeck();
+		cout << choice;
 	}
 	else if (choice == 2)
 	{
 		DrawCard();
+		cout << choice;
 	}
 	else if (choice == 3)
 	{
 		viewDeck();
+		cout << choice;
+	}
+	else if (choice == 4)
+	{
+		cout << choice;
+		addSpell();
 	}
 	else
 	{
@@ -79,4 +94,52 @@ void ShuffleDeck()
 void DrawCard()
 {
 	// will display the next card in the deck THIS IS NOT RANDOM it will display the next value in the index++ of te array
+}
+
+void addSpell()
+{
+	char spellType;
+	cout << " Is the Spell a Cantrip (C), or a spell Spell (S)-- input (B) to go back" << endl;
+	cin >> spellType;
+	spellCheck(spellType);
+}
+
+void spellCheck(char input)
+{
+	bool selVer;
+	if (input == 'C' || input == 'c')
+	{
+		string spellType = "Cantrip";
+		selVer = selectionVerify(spellType);
+		if (selVer == true)
+		{
+			cout << "test";
+			system("pause");
+			//addSpellUserInput(spellType);
+		}
+		else
+		{
+			addSpell();
+		}
+		menuLoop();
+	}
+	else if (input == 'S' || input == 's')
+	{
+		string spellType = "Spell";
+		selVer = selectionVerify(spellType);
+		if (selVer == true)
+		{
+			cout << "test";
+			//addSpellUserInput(spellType);
+		}
+		else
+		{
+			addSpell();
+		}
+		menuLoop();
+	}
+	else if (input == 'b' || input == 'B')
+	{
+		menuLoop();
+	}
 }
