@@ -19,6 +19,7 @@ void ShuffleDeck();
 void DrawCard();
 void spellCheck(char);
 void addSpell();
+string addSpellUserInput(string, string);
 
 int main()
 {
@@ -119,8 +120,10 @@ void spellCheck(char input)
 		}
 		else
 		{
+			conClr();
 			addSpell();
 		}
+		conClr();
 		menuLoop();
 	}
 	else if (input == 'S' || input == 's')
@@ -129,17 +132,37 @@ void spellCheck(char input)
 		selVer = selectionVerify(spellType);
 		if (selVer == true)
 		{
-			cout << "test";
-			//addSpellUserInput(spellType);
+			string level;
+			cout << "Please select a level 1-9 for the spell";
+			cin >> level;
+			selVer = selectionVerify(level);
+			if (selVer == true)
+			{
+				addSpellUserInput(spellType, level);
+			}
+			else
+			{
+				conClr();
+				addSpell();
+			}
 		}
 		else
 		{
+			conClr();
 			addSpell();
 		}
+		conClr();
 		menuLoop();
 	}
 	else if (input == 'b' || input == 'B')
 	{
+		conClr();
 		menuLoop();
 	}
+}
+
+string addSpellUserInput(string SpellType, string level)
+{
+	cout << "Please input the name of the spell";
+	return 0;
 }
